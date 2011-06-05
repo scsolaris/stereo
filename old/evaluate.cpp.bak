@@ -1,0 +1,95 @@
+#include "cv.h"
+#include "highgui.h"
+#include <stdio.h>
+
+#define  IMAGEL      "backl.bmp"
+#define  TRUEDISP      "truedisp.pgm"
+#define  eval_ignore_border  18
+#define  eval_bad_thresh 1.0	// Acceptable disparity error
+
+//left:the reference image
+//true_disp:the ground trueth image
+int compute_occ(unsigned char* true_disp,unsigned char* occ,int w,int h,int scale)
+{
+	int b=eval_ignore_border;
+	for(int y=0;y<h;y++)
+        for(int x=0;x<w;x++)
+        {
+			if(x < b || x >= w-b || y < b || y >= h-b)
+				occ[y*w+x]=0;
+			else
+				occ[y*w+x]=255;
+		}
+	unsigned char* flag = new unsigned char[w*h]; 
+	memset(flag,0,sizeof(unsigned char)*w*h);
+	int d,t;
+
+	for(int y=0;y<h;y++)
+	{
+		for(int x=0;x<w;x++)
+		{
+			d = ceil(true_disp[y*w+x]*scale/255.0);
+//			if(x<d)	{printf("error:x<true_disp[y*w+x]!");return -1;}
+			if(flag[y*w+x-d]==0)
+				flag[y*w+x-d]=d;
+			else
+			{
+				t = d-flag[y*w+x-d];
+				if(t>0)	//if the current disp > the old disp
+				{
+//					occ[y*w+x]  = 128;	//draw the current point gray
+					occ[y*w+x-t] = 0;	//draw the old point black
+					flag[y*w+w-d] = d;	//flag the current disp as the max disp
+				}
+				else	occ[y*w+x]	= 0;	//draw the current point black
+			}
+		}
+	}
+
+	delete []flag;
+	return 0;
+}
+
+float eval_nonocc(unsigned char* true_disp,unsigned char* disp,unsigned char* occ,int w,int h,int scale)
+{
+	float err_occ=0;
+	int b=eval_ignore_border,t,i,n=0;
+	for(int y=b+1;y<h-b;y++)
+        for(int x=b+1;x<w-b;x++)
+        {
+			i=y*w+x;
+			if(occ[i])
+			{
+				n++;
+				t=abs((int)((true_disp[i]-disp[i])/255.0*scale));
+//				printf("%d,%d,%d ",true_disp[i],disp[i],t);
+				if(t > eval_bad_thresh) err_occ++;	
+			}		
+		}
+
+	err_occ/=n;
+	return err_occ;	
+}
+int main()
+{
+	IplImage *pImgl,*pTrueDisp,*pOcc,*pDisp,*pNonocc;
+	pImgl = cvLoadImage(IMAGEL,0);
+    if(pImgl == NULL) printf("cannot open imgl!\n");
+	pTrueDisp = cvLoadImage(TRUEDISP,0);
+    if(pTrueDisp == NULL) printf("cannot open truedisp!\n");
+	pDisp = cvLoadImage("disp_SAD.bmp",0);
+    if(pDisp == NULL) printf("cannot open pDisp!\n");
+	pOcc = cvCreateImage(cvGetSize(pTrueDisp),pTrueDisp->depth,pTrueDisp->nChannels);
+	pNonocc = cvLoadImage("nonocc.png",0);
+	
+	int width = pImgl->width;
+    int height = pImgl->height;
+
+	compute_occ((unsigned char*)pTrueDisp->imageData,(unsigned char*)pOcc->imageData,width,height,16);
+//	float err_nonocc = eval_nonocc((unsigned char*)pTrueDisp->imageData,(unsigned char*)pDisp->imageData,(unsigned char*)pOcc->imageData,width,height,16);
+	float err_nonocc = eval_nonocc((unsigned char*)pTrueDisp->imageData,(unsigned char*)pDisp->imageData,(unsigned char*)pNonocc->imageData,width,height,16);
+	cvSaveImage("Occ.png",pOcc);
+	printf("err_nonocc:%f\n",err_nonocc);
+
+	return 0;
+}

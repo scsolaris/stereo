@@ -1,0 +1,149 @@
+latest
+
+loading Tsukuba
+SAD algorithm
+proccessing time:	61.850ms
+Percentage of Bad Matching pixels:	 8.452%
+SSD algorithm
+proccessing time:	80.546ms
+Percentage of Bad Matching pixels:	 9.764%
+cudaSSD algorithm
+proccessing time:	 8.539ms
+Percentage of Bad Matching pixels:	 9.758%
+
+loading Venus
+SAD algorithm
+proccessing time:	116.263ms
+Percentage of Bad Matching pixels:	 6.155%
+SSD algorithm
+proccessing time:	149.242ms
+Percentage of Bad Matching pixels:	 6.091%
+cudaSSD algorithm
+proccessing time:	16.141ms
+Percentage of Bad Matching pixels:	 6.766%
+
+loading Teddy
+SAD algorithm
+proccessing time:	330.919ms
+Percentage of Bad Matching pixels:	21.778%
+SSD algorithm
+proccessing time:	419.081ms
+Percentage of Bad Matching pixels:	21.927%
+cudaSSD algorithm
+proccessing time:	51.701ms
+Percentage of Bad Matching pixels:	19.917%
+
+loading Cones
+SAD algorithm
+proccessing time:	333.955ms
+Percentage of Bad Matching pixels:	15.712%
+SSD algorithm
+proccessing time:	422.644ms
+Percentage of Bad Matching pixels:	15.545%
+cudaSSD algorithm
+proccessing time:	51.894ms
+Percentage of Bad Matching pixels:	12.968%
+------------------------------
+loading Tsukuba
+SAD time:62.007000ms
+cudaSSD time:8.471000ms
+loading Venus
+SAD time:116.671997ms
+cudaSSD time:16.040001ms
+loading Teddy
+SAD time:330.194000ms
+cudaSSD time:51.604000ms
+loading Cones
+SAD time:335.911011ms
+cudaSSD time:51.771999ms
+
+------------------------
+loading Tsukuba
+SAD algorithm
+proccessing time:	61.452ms
+Percentage of Bad Matching pixels:	 8.688%
+SSD algorithm
+proccessing time:	78.668ms
+Percentage of Bad Matching pixels:	10.245%
+cudaSSD algorithm
+proccessing time:	 8.580ms
+Percentage of Bad Matching pixels:	 9.758%
+
+loading Venus
+SAD algorithm
+proccessing time:	116.576ms
+Percentage of Bad Matching pixels:	 6.963%
+SSD algorithm
+proccessing time:	143.102ms
+Percentage of Bad Matching pixels:	 8.887%
+cudaSSD algorithm
+proccessing time:	16.165ms
+Percentage of Bad Matching pixels:	 6.766%
+
+loading Teddy
+SAD algorithm
+proccessing time:	329.973ms
+Percentage of Bad Matching pixels:	23.904%
+SSD algorithm
+proccessing time:	404.442ms
+Percentage of Bad Matching pixels:	28.735%
+cudaSSD algorithm
+proccessing time:	51.770ms
+Percentage of Bad Matching pixels:	19.917%
+
+loading Cones
+SAD algorithm
+proccessing time:	332.933ms
+Percentage of Bad Matching pixels:	18.979%
+SSD algorithm
+proccessing time:	403.175ms
+Percentage of Bad Matching pixels:	25.875%
+cudaSSD algorithm
+proccessing time:	51.800ms
+Percentage of Bad Matching pixels:	12.992%
+
+-----------------------------
+loading Tsukuba
+SAD algorithm
+proccessing time:	65.050ms
+Percentage of Bad Matching pixels:	 8.688%
+SSD algorithm
+proccessing time:	81.927ms
+Percentage of Bad Matching pixels:	 9.882%
+cudaSSD algorithm
+proccessing time:	 9.054ms
+Percentage of Bad Matching pixels:	 9.758%
+
+loading Venus
+SAD algorithm
+proccessing time:	118.709ms
+Percentage of Bad Matching pixels:	 6.963%
+SSD algorithm
+proccessing time:	147.056ms
+Percentage of Bad Matching pixels:	 8.708%
+cudaSSD algorithm
+proccessing time:	16.052ms
+Percentage of Bad Matching pixels:	 6.766%
+
+loading Teddy
+SAD algorithm
+proccessing time:	341.857ms
+Percentage of Bad Matching pixels:	23.904%
+SSD algorithm
+proccessing time:	422.624ms
+Percentage of Bad Matching pixels:	28.329%
+cudaSSD algorithm
+proccessing time:	51.508ms
+Percentage of Bad Matching pixels:	19.917%
+
+loading Cones
+SAD algorithm
+proccessing time:	345.588ms
+Percentage of Bad Matching pixels:	18.979%
+SSD algorithm
+proccessing time:	430.325ms
+Percentage of Bad Matching pixels:	25.360%
+cudaSSD algorithm
+proccessing time:	52.043ms
+Percentage of Bad Matching pixels:	12.992%
+

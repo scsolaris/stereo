@@ -1,0 +1,6 @@
+Image pair  	Disps.   	Scale
+Tsukuba		0..15		16	
+Venus		0..19		8	
+Teddy		0..59		4	
+Cones		0..59		4	
+

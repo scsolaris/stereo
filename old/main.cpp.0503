@@ -1,0 +1,41 @@
+#include "SAD.h"
+#include "cudaSSD.h"
+
+#include "cv.h"
+#include "highgui.h"
+#include <stdio.h>
+
+#define  IMAGEL      "backl.bmp"
+#define  IMAGER      "backr.bmp"
+
+int main()
+{
+    //initiation
+    IplImage *pImgl,*pImgr,*pImg[2];
+    pImgl = cvLoadImage(IMAGEL,0);
+    if(pImgl == NULL) printf("cannot open imgl!\n");
+    pImgr = cvLoadImage(IMAGER,0);
+    if(pImgr == NULL) printf("cannot open imgr!\n");
+    pImg[0] = cvCreateImage(cvGetSize(pImgl),pImgl->depth,pImgl->nChannels);
+ 	pImg[1] = cvCreateImage(cvGetSize(pImgl),pImgl->depth,pImgl->nChannels);
+
+    int width = pImgl->width;
+    int height = pImgl->height;
+    char* Dispmap = new char[width*height];
+	float time;
+
+	//SAD
+	time=SAD(pImgl->imageData,pImgr->imageData,Dispmap,width,height);
+    memcpy(pImg[0]->imageData,Dispmap,sizeof(char)*width*height);
+    cvSaveImage("disp_SAD.bmp",pImg[0]);
+	printf("SAD time:%fms\n",time);
+
+	//cudaSSD
+	time = cudaSSD((unsigned char *)(pImgl->imageData),(unsigned char *)(pImgr->imageData),Dispmap,width,height);
+    memcpy(pImg[1]->imageData,Dispmap,sizeof(char)*width*height);
+    cvSaveImage("disp_cudaSSD.bmp",pImg[1]);
+	printf("cudaSSD time:%fms\n",time);
+
+    delete []Dispmap;
+    return 0;
+}

@@ -1,0 +1,18 @@
+stereo: cudaSSD.o SAD.o SSD.o evaluate.o main.o
+		nvcc $^ -o $@ $(LIB)
+main.o: main.cpp cudaSSD.h SAD.h SSD.h evaluate.h
+		nvcc -c $< $(CPPFLAGS)
+cudaSSD.o:	cudaSSD.cu cudaSSD.h
+			nvcc -c  $< $(NVCCFLAGS)
+SAD.o:	SAD.cpp SAD.h
+			nvcc -c  $< $(NVCCFLAGS)
+SSD.o:	SSD.cpp SSD.h
+			nvcc -c  $< $(NVCCFLAGS)
+evaluate.o:	evaluate.cpp evaluate.h
+			nvcc -c  $< $(NVCCFLAGS)
+NVCCFLAGS += -I/home/wuhao/NVIDIA_GPU_Computing_SDK/C/common/inc
+CPPFLAGS += `pkg-config --cflags opencv`
+LIB += `pkg-config --libs opencv` -L/home/wuhao/NVIDIA_GPU_Computing_SDK/C/lib -lcutil_x86_64 
+clean:
+	-rm stereo *.o
+.PHONY: clean
